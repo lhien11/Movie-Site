@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using vega.Core.Models;
 
