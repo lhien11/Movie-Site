@@ -1,5 +1,9 @@
+
+using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using vega.Core;
+using vega.Core.Models;
 using vega.Models;
 
 namespace vega.Persistence
@@ -12,7 +16,7 @@ namespace vega.Persistence
         this.context = context;
     }
 
-    public async Task<Vehicle> GetVehicle(int id, bool includeRelated = true)
+    public async Task<Core.Models.Vehicle> GetVehicle(int id, bool includeRelated = true)
     {
         if (!includeRelated)
           return await context.Vehicles.FindAsync(id);
@@ -25,14 +29,29 @@ namespace vega.Persistence
           .SingleOrDefaultAsync(v => v.Id == id);
      }
 
-    public void Add(Vehicle vehicle) 
+    public void Add(Core.Models.Vehicle vehicle) 
     {
       context.Vehicles.Add(vehicle);
     }
 
-    public void Remove(Vehicle vehicle)
+    public void Remove(Core.Models.Vehicle vehicle)
     {
       context.Remove(vehicle);
     }
-  }
+
+        Task<Models.Vehicle> IVehicleRepository.GetVehicle(int id, bool includeRelated)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IVehicleRepository.Add(Models.Vehicle vehicle)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IVehicleRepository.Remove(Models.Vehicle vehicle)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
