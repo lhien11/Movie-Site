@@ -31,6 +31,8 @@ module.exports = (env) => {
                 'es6-shim',
                 'es6-promise',
                 'event-source-polyfill',
+                'ng2-toasty',
+                'ng2-toasty/bundles/style-bootstrap.css',
                 'jquery',
                 'zone.js',
             ]
@@ -51,7 +53,7 @@ module.exports = (env) => {
         output: { path: path.join(__dirname, 'wwwroot', 'dist') },
         module: {
             rules: [
-                { test: /\.css(\?|$)/, use: extractCSS.extract({ use: isDevBuild ? 'css-loader' : 'css-loader?minimize' }) }
+                { test: /\.css(\?|$)/, use: extractCSS.extract({ use: 'css-loader' }) }
             ]
         },
         plugins: [
@@ -73,7 +75,7 @@ module.exports = (env) => {
             libraryTarget: 'commonjs2',
         },
         module: {
-            rules: [ { test: /\.css(\?|$)/, use: ['to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize' ] } ]
+            rules: [ { test: /\.css(\?|$)/, use: ['to-string-loader', 'css-loader'] } ]
         },
         entry: { vendor: ['aspnet-prerendering'] },
         plugins: [
